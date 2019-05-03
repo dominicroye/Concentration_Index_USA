@@ -25,8 +25,6 @@ library(sf)
 library(raster)
 ```
 
-    ## Warning: package 'raster' was built under R version 3.5.1
-
     ## Loading required package: sp
 
 ``` r
@@ -59,12 +57,42 @@ ggplot()+
     geom_tile(data=df,
             mapping=aes(x,y,fill=CI))+
      geom_sf(data=limit,fill="transparent")+
-       scale_fill_gradientn(colours=rev(col_ci))+
+       scale_fill_gradientn(colours=rev(col_ci),
+                            breaks=round(seq(0.43,0.70,0.03),2))+
+     guides(fill=guide_colorbar(barwidth=0.5,barheight = 10))+
        coord_sf(crs=2163,datum=NA)+
       theme_void()
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-1-1.png)
+
+After the publication of the research article we calculate the Concentration Index with the [PRISM](http://www.prism.oregonstate.edu/) climate data set, which has a higher resolution with 4km (PRISM Climate Group, Oregon State University). Nevertheless, the temporal coverage is limited to the period from 1981 to 2017.
+
+``` r
+#import raster
+r <- raster("./Data/CI_PRISM_USA.tif")
+
+#raster to data.frame
+df <- as.data.frame(r,xy=TRUE,na.rm=TRUE)
+names(df)[3] <- "CI" #rename variable column
+
+#plotting
+ggplot()+
+  geom_tile(data=df,
+            aes(x,y,fill=CI))+
+  geom_sf(data=limit,
+          fill="transparent")+
+    scale_fill_gradientn(colours=rev(col_ci),
+                         breaks=round(seq(0.43,0.70,0.03),2))+
+    guides(fill=guide_colorbar(barwidth=0.5,barheight = 10))+
+     labs(fill="CI",title="Concentration Index",
+       caption="Dominic Royé (@dr_xeo) | Data: PRISM Climate Group, Oregon State University")+
+    coord_sf(crs=2163,datum=NA)+
+  theme_void()+
+  theme(plot.title = element_text(size=16))
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 -   Fig. 4. Seasonal rainfall regimes (1956–2006) (P, spring, S, summer, A, autumn, W, winter)
 
@@ -118,7 +146,7 @@ ggplot()+
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 Map projection
 --------------

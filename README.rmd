@@ -38,9 +38,38 @@ ggplot()+
     geom_tile(data=df,
             mapping=aes(x,y,fill=CI))+
      geom_sf(data=limit,fill="transparent")+
-       scale_fill_gradientn(colours=rev(col_ci))+
+       scale_fill_gradientn(colours=rev(col_ci),
+                            breaks=round(seq(0.43,0.70,0.03),2))+
+     guides(fill=guide_colorbar(barwidth=0.5,barheight = 10))+
        coord_sf(crs=2163,datum=NA)+
       theme_void()
+```
+
+After the publication of the research article we calculate the Concentration Index with the [PRISM](http://www.prism.oregonstate.edu/) climate data set, which has a higher resolution with 4km (PRISM Climate Group, Oregon State University). Nevertheless, the temporal coverage is limited to the period from 1981 to 2017. 
+
+```{r}
+#import raster
+r <- raster("./Data/CI_PRISM_USA.tif")
+
+#raster to data.frame
+df <- as.data.frame(r,xy=TRUE,na.rm=TRUE)
+names(df)[3] <- "CI" #rename variable column
+
+#plotting
+ggplot()+
+  geom_tile(data=df,
+            aes(x,y,fill=CI))+
+  geom_sf(data=limit,
+          fill="transparent")+
+    scale_fill_gradientn(colours=rev(col_ci),
+                         breaks=round(seq(0.43,0.70,0.03),2))+
+    guides(fill=guide_colorbar(barwidth=0.5,barheight = 10))+
+     labs(fill="CI",title="Concentration Index",
+       caption="Dominic Royé (@dr_xeo) | Data: PRISM Climate Group, Oregon State University")+
+    coord_sf(crs=2163,datum=NA)+
+  theme_void()+
+  theme(plot.title = element_text(size=16))
+   
 ```
 
 
