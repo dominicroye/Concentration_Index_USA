@@ -14,7 +14,7 @@ The contiguous US exhibits a wide variety of precipitation regimes, first, becau
 - Fig. 8. Concentration Index values (1956–2006).
 
 
-```{r}
+```{r,dpi=300}
 #libraries
 library(ggplot2)
 library(sf)
@@ -47,7 +47,7 @@ ggplot()+
 
 After the publication of the research article we calculate the Concentration Index with the [PRISM](http://www.prism.oregonstate.edu/) climate data set, which has a higher resolution with 4km (PRISM Climate Group, Oregon State University). Nevertheless, the temporal coverage is limited to the period from 1981 to 2017. 
 
-```{r}
+```{r,dpi=300}
 #import raster
 r <- raster("./Data/CI_PRISM_USA.tif")
 
@@ -77,7 +77,7 @@ ggplot()+
 - Fig. 4. Seasonal rainfall regimes (1956–2006) (P, spring, S, summer, A, autumn, W, winter)
 
 
-```{r}
+```{r,dpi=300}
 #libraries
 library(ggplot2)
 library(sf)
