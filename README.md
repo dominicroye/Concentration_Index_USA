@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/161037059.svg)](https://zenodo.org/badge/latestdoi/161037059)
+
 Concentration of daily precipitation in the contiguous United States 1956–2006
 ================
 Dominic Royé
