@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/161037059.svg)](https://zenodo.org/badge/latestdoi/161037059)
+<a href="https://zenodo.org/badge/latestdoi/161037059"><img src="https://zenodo.org/badge/161037059.svg" alt="DOI"></a>
 
 Concentration of daily precipitation in the contiguous United States 1956–2006
 ================
